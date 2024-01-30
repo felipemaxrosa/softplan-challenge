@@ -1,7 +1,13 @@
 import React from 'react';
 
-import { Header } from './LayoutHeader.styles';
+import { Header, UserAvatar } from './LayoutHeader.styles';
+import { SoftplanImage } from '../../../assets/images';
 
 export const LayoutHeader = () => {
-  return <Header>Layout Header</Header>;
+  return (
+    <Header>
+      <SoftplanImage />
+      <UserAvatar>F</UserAvatar>
+    </Header>
+  );
 };
