@@ -1,5 +1,5 @@
 import React from 'react';
 
 export const LoginPage = () => {
-  return <div>Login</div>;
+  return <div data-testid="login-page">Login</div>;
 };
