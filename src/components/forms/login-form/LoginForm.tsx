@@ -1,23 +1,24 @@
 import React from 'react';
-import { Grid, Paper } from '@mui/material';
+import { Grid } from '@mui/material';
+
 import { Button, Input } from '../../form';
-import { FormContainer } from './LoginForm.styles';
+import { FormContainer, FormPaper } from './LoginForm.styles';
 
 export const LoginForm = () => {
   return (
-    <Paper>
+    <FormPaper>
       <FormContainer>
         <form>
           <Grid container mb={2} spacing={2}>
-            <Grid item xs={12} sm={2}>
+            <Grid item xs={12}>
               <Input
-                label="Usuario"
+                label="Usuário"
                 name="user"
                 // value={state?.id ? state.id : ''}
                 // onChange={handleInputChange}
               />
             </Grid>
-            <Grid item xs={12} sm={2}>
+            <Grid item xs={12}>
               <Input
                 label="Senha"
                 name="password"
@@ -29,7 +30,7 @@ export const LoginForm = () => {
           </Grid>
 
           <Grid container spacing={2} direction="row-reverse">
-            <Grid item xs={6} md={2}>
+            <Grid item xs={6}>
               <Button
                 variant="contained"
                 fullWidth
@@ -39,18 +40,9 @@ export const LoginForm = () => {
                 Login
               </Button>
             </Grid>
-            {/* <Grid item xs={6} md={2}>
-              <Button
-                fullWidth
-                onClick={handleCancelButtonClick}
-                disabled={isSubmitting}
-              >
-                Cancelar
-              </Button>
-            </Grid> */}
           </Grid>
         </form>
       </FormContainer>
-    </Paper>
+    </FormPaper>
   );
 };
