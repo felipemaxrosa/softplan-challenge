@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 
-import { selectShowMyProfileModal } from '../../../store/selectors';
 import { useAppDispatch, useAppSelector } from '../../../store';
+import { selectShowMyProfileModal } from '../../../store/selectors';
 import { showMyProfile } from '../../../store/actions/modal-actions';
 
 export const MyProfileModal = () => {
@@ -20,7 +20,7 @@ export const MyProfileModal = () => {
 
   return (
     <Dialog
-      id="success-modal"
+      data-testid="my-profile-modal"
       open={open}
       maxWidth="md"
       fullWidth
