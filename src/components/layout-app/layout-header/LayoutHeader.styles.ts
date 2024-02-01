@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Header = styled.header`
-  height: 54px;
+  height: 40px;
   background-color: rgba(12, 13, 15, 0.7);
   backdrop-filter: blur(5px);
   position: fixed;
