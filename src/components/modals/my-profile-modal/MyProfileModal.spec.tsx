@@ -1,8 +1,8 @@
 import { Provider, useSelector } from 'react-redux';
-
-import { MyProfileModal } from './MyProfileModal';
 import { render, screen } from '@testing-library/react';
+
 import store from '../../../store';
+import { MyProfileModal } from './MyProfileModal';
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
@@ -28,5 +28,6 @@ describe('MyProfileModal', () => {
 
     render(<Component />);
     expect(screen.getByTestId('my-profile-modal')).toBeInTheDocument();
+    expect(screen.getByText('Meu Perfil')).toBeInTheDocument();
   });
 });

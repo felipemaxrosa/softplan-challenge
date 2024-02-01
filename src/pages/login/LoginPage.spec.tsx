@@ -1,8 +1,8 @@
+import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 
-import { LoginPage } from './LoginPage';
-import { Provider } from 'react-redux';
 import store from '../../store';
+import { LoginPage } from './LoginPage';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
