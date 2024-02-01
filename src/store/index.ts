@@ -1,10 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-import { userReducer } from './reducers';
+import { modalsReducer, userReducer } from './reducers';
 
 export const rootReducer = combineReducers({
   user: userReducer,
+  modal: modalsReducer,
 });
 
 const store = configureStore({
