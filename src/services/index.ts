@@ -1,2 +1,2 @@
-export * as localService from './localService';
+export * as storageService from './storageService';
 export * as userService from './userService';

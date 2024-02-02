@@ -1,12 +1,14 @@
+import { storageService } from '.';
 import { User } from '../models/interfaces';
-import { mockUsers } from '../store/mocks';
+import { STORAGE_USERS } from '../constants';
 
 interface Credentials {
   name: string;
   password: string;
 }
 const validateCredentials = ({ name, password }: Credentials): User | null => {
-  const validUser = mockUsers.find(
+  const users = storageService.getItem<User[]>(STORAGE_USERS);
+  const validUser = users?.find(
     (user) => user.name === name && user.password === password
   );
 
