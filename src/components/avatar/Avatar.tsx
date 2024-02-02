@@ -1,35 +1,34 @@
 import React, { Fragment, PropsWithChildren, useState } from 'react';
-import { IconButton, MenuItem, Tooltip } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 
-import { UserAvatar, AccountMenu } from './Avatar.styles';
+import { UserAvatar, AccountMenu, MenuItem, AvatarIcon } from './Avatar.styles';
+import { useAppDispatch } from '../../store';
+import { showMyProfile } from '../../store/actions/modal-actions';
 
 export const Avatar = ({ children }: PropsWithChildren) => {
   const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleAvatarClick = () => {
     setOpen(!open);
   };
 
-  const handleMenuClose = () => setOpen(false);
+  const handleMyProfileClick = () => {
+    dispatch(showMyProfile(true));
+    setOpen(false);
+  };
 
   return (
     <Tooltip title="Account settings">
       <Fragment>
-        <IconButton
-          onClick={handleAvatarClick}
-          size="small"
-          sx={{ ml: 2 }}
-          aria-controls={open ? 'account-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-        >
+        <IconButton onClick={handleAvatarClick} size="small" sx={{ ml: 2 }}>
           <UserAvatar>{children}</UserAvatar>
         </IconButton>
 
         {open && (
           <AccountMenu>
-            <MenuItem onClick={handleMenuClose}>
-              <Avatar /> Meu Perfil
+            <MenuItem onClick={handleMyProfileClick}>
+              <AvatarIcon /> Meu Perfil
             </MenuItem>
           </AccountMenu>
         )}
