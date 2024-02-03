@@ -4,6 +4,7 @@ import { Paper, Table, TableContainer } from '@mui/material';
 import { UsersTableHead } from './UsersTableHead';
 import { SortOrder, User } from '../../../models/interfaces';
 import { USER_TABLE_HEADS } from '../../../constants';
+import { UsersTableToolbar } from './UsersTableToolbar';
 
 export const UsersTable = () => {
   const [order, setOrder] = useState<SortOrder>('asc');
@@ -17,9 +18,9 @@ export const UsersTable = () => {
 
   return (
     <Paper>
-      <div>Toolbar</div>
+      <UsersTableToolbar />
       <TableContainer>
-        <Table sx={{ minWidth: 750 }} size="medium">
+        <Table size="medium">
           <UsersTableHead
             order={order}
             orderBy={orderBy}
