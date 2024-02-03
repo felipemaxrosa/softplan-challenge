@@ -1,4 +1,4 @@
-import { Avatar, MenuItem as MuiMenuItem } from '@mui/material';
+import { Avatar } from '@mui/material';
 import styled from 'styled-components';
 
 export const UserAvatar = styled(Avatar)`
@@ -19,12 +19,6 @@ export const AccountMenu = styled.div`
   z-index: 2;
   background: white;
   color: black;
-`;
-
-export const MenuItem = styled(MuiMenuItem)`
-  &.MuiMenuItem-root {
-    padding: 8px;
-  }
 `;
 
 export const AvatarIcon = styled(Avatar)`

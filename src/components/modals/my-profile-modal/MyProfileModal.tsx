@@ -6,18 +6,20 @@ import {
   DialogActions,
   DialogContent,
   Grid,
+  SelectChangeEvent,
 } from '@mui/material';
 
 import {
   selectActiveUser,
   selectShowMyProfileModal,
 } from '../../../store/selectors';
-import { Input } from '../../form';
+import { Input, Select } from '../../form';
 import { Profile } from '../../../models/enums';
 import { User } from '../../../models/interfaces';
+import { PROFILE_SELECT_ITEMS } from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../store';
-import { setActiveUser, updateUser } from '../../../store/actions/user-actions';
 import { showMyProfile } from '../../../store/actions/modal-actions';
+import { setActiveUser, updateUser } from '../../../store/actions/user-actions';
 
 export const MyProfileModal = () => {
   const open = useAppSelector(selectShowMyProfileModal);
@@ -38,6 +40,15 @@ export const MyProfileModal = () => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = event.target;
+
+    setLocalUser((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (event: SelectChangeEvent<unknown>) => {
     const { value, name } = event.target;
 
     setLocalUser((prev) => ({
@@ -91,12 +102,13 @@ export const MyProfileModal = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Input
+            <Select
               label="Perfil"
               name="profile"
-              disabled={localUser?.profile === Profile.USER}
-              value={localUser?.profile}
-              onChange={handleChange}
+              disabled={activeUser?.profile === Profile.USER}
+              value={localUser?.profile ?? Profile.USER}
+              onChange={handleSelectChange}
+              items={PROFILE_SELECT_ITEMS}
             />
           </Grid>
         </Grid>

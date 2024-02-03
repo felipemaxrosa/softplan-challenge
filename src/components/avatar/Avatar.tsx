@@ -1,9 +1,10 @@
 import React, { Fragment, PropsWithChildren, useState } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 
-import { UserAvatar, AccountMenu, MenuItem, AvatarIcon } from './Avatar.styles';
+import { UserAvatar, AccountMenu, AvatarIcon } from './Avatar.styles';
 import { useAppDispatch } from '../../store';
 import { showMyProfile } from '../../store/actions/modal-actions';
+import { MenuItem } from '../shared';
 
 export const Avatar = ({ children }: PropsWithChildren) => {
   const [open, setOpen] = useState(false);
