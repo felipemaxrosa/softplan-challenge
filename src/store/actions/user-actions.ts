@@ -35,4 +35,4 @@ export const updateUser = createAsyncThunk<void, User>(
   }
 );
 export const deleteUser = createAction<{ id: number }>(DELETE_USER);
-export const setActiveUser = createAction<User>(SET_ACTIVE_USER);
+export const setActiveUser = createAction<User | undefined>(SET_ACTIVE_USER);

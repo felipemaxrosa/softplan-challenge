@@ -20,11 +20,3 @@ export const AccountMenu = styled.div`
   background: white;
   color: black;
 `;
-
-export const AvatarIcon = styled(Avatar)`
-  &.MuiAvatar-root {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-  }
-`;
