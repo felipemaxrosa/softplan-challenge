@@ -15,16 +15,3 @@ export const Header = styled.header`
 
   color: #ffffff;
 `;
-
-export const UserAvatar = styled.div`
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-
-  background-color: #f2f2f2;
-  color: #777777;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
