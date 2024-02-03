@@ -7,7 +7,7 @@ export interface ModalReducerState {
 }
 
 const modalInitialState: ModalReducerState = {
-  showMyProfile: true,
+  showMyProfile: false,
 };
 
 export const modalsReducer = createReducer(modalInitialState, (userBuilder) => {
