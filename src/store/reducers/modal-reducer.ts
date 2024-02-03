@@ -3,19 +3,22 @@ import { createReducer } from '@reduxjs/toolkit';
 import { modalActions } from '../actions';
 
 export interface ModalReducerState {
-  showMyProfile: boolean;
+  userProfile: boolean;
+  editingUser: boolean;
 }
 
 const modalInitialState: ModalReducerState = {
-  showMyProfile: false,
+  userProfile: false,
+  editingUser: false,
 };
 
 export const modalsReducer = createReducer(modalInitialState, (userBuilder) => {
   userBuilder.addCase(
-    modalActions.showMyProfileModal,
+    modalActions.showUserProfileModal,
     (state, { payload }) => ({
       ...state,
-      showMyProfile: payload,
+      userProfile: payload,
+      editingUser: true,
     })
   );
 });

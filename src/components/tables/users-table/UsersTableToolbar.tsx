@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { selectIsAdminUser } from '../../../store/selectors';
-import { showMyProfileModal } from '../../../store/actions/modal-actions';
+import { newUser, showUserModal } from '../../../store/actions/user-actions';
 
 export const UsersTableToolbar = () => {
   const isAdmin = useAppSelector(selectIsAdminUser);
@@ -21,7 +21,7 @@ export const UsersTableToolbar = () => {
   };
 
   const handleNewUser = () => {
-    dispatch(showMyProfileModal(true));
+    dispatch(newUser());
   };
 
   return (

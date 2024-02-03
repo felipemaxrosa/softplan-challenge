@@ -11,27 +11,45 @@ import {
 
 import {
   selectActiveUser,
-  selectShowMyProfileModal,
+  selectIsEditing,
+  selectSelectedUser,
+  selectShowUserModal,
 } from '../../../store/selectors';
 import { Input, Select } from '../../form';
 import { Profile } from '../../../models/enums';
 import { User } from '../../../models/interfaces';
 import { PROFILE_SELECT_ITEMS } from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../store';
-import { showMyProfileModal } from '../../../store/actions/modal-actions';
-import { setActiveUser, updateUser } from '../../../store/actions/user-actions';
+import {
+  addUser,
+  setActiveUser,
+  showMyProfileModal,
+  updateUser,
+} from '../../../store/actions/user-actions';
 
-export const MyProfileModal = () => {
-  const open = useAppSelector(selectShowMyProfileModal);
+const INITIAL_USER_STATE: User = {
+  email: '',
+  name: '',
+  password: '',
+  profile: Profile.USER,
+};
+
+export const UserModal = () => {
+  const [localUser, setLocalUser] = useState(INITIAL_USER_STATE);
+
+  const open = useAppSelector(selectShowUserModal);
+  const isEditingUser = useAppSelector(selectIsEditing);
+  const selectedUser = useAppSelector(selectSelectedUser);
   const activeUser = useAppSelector(selectActiveUser);
-
-  const [localUser, setLocalUser] = useState({} as User);
+  const editingOwnProfile = isEditingUser && localUser?.id === selectedUser?.id;
 
   useEffect(() => {
-    if (activeUser) {
-      setLocalUser(activeUser);
+    if (isEditingUser && selectedUser) {
+      setLocalUser(selectedUser);
+    } else {
+      setLocalUser(INITIAL_USER_STATE);
     }
-  }, [activeUser]);
+  }, [isEditingUser, selectedUser]);
 
   const dispatch = useAppDispatch();
 
@@ -58,10 +76,20 @@ export const MyProfileModal = () => {
   };
 
   const handleSave = () => {
-    dispatch(setActiveUser(localUser));
-    dispatch(updateUser(localUser));
+    if (isEditingUser) {
+      dispatch(setActiveUser(localUser));
+      dispatch(updateUser(localUser));
+    } else {
+      dispatch(addUser(localUser));
+    }
 
     handleClose();
+  };
+
+  const getDialogTitle = () => {
+    if (!isEditingUser) return 'Novo Perfil';
+    if (!editingOwnProfile) return 'Editar Perfil';
+    return 'Meu Perfil';
   };
 
   return (
@@ -72,7 +100,7 @@ export const MyProfileModal = () => {
       fullWidth
       onClose={handleClose}
     >
-      <DialogTitle>Meu Perfil</DialogTitle>
+      <DialogTitle>{getDialogTitle()}</DialogTitle>
       <DialogContent sx={{ padding: '32px 24px' }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>

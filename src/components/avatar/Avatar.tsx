@@ -5,8 +5,11 @@ import { MenuItem } from '../shared';
 import { useAppDispatch } from '../../store';
 import { AvatarIcon, LogoutIcon } from '../icons';
 import { UserAvatar, MyAccountMenu } from './Avatar.styles';
-import { setActiveUser, userLogout } from '../../store/actions/user-actions';
-import { showMyProfileModal } from '../../store/actions/modal-actions';
+import {
+  showMyProfileModal,
+  showUserModal,
+  userLogout,
+} from '../../store/actions/user-actions';
 
 export const Avatar = ({ children }: PropsWithChildren) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);

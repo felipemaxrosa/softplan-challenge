@@ -7,12 +7,15 @@ import { STORAGE_USERS, STORAGE_ACTIVE_USER } from '../../constants';
 
 const BOOTSTRAP = 'USER/BOOTSTRAP';
 
-const NEW_USER = 'USER/NEW_USER';
-const UPDATE_USER = 'USER/UPDATE_USER';
 const DELETE_USER = 'USER/DELETE_USER';
 const EDIT_USER = 'USER/EDIT_USER';
-const SET_ACTIVE_USER = 'USER/SET_ACTIVE_USER';
 const LOGOUT_USER = 'USER/LOGOUT_USER';
+const NEW_USER = 'USER/NEW_USER';
+const ADD_USER = 'USER/ADD_USER';
+const SET_ACTIVE_USER = 'USER/SET_ACTIVE_USER';
+const SHOW_MY_PROFILE_MODAL = 'USER/SHOW_MY_PROFILE_MODAL';
+const SHOW_USER_MODAL = 'USER/SHOW_USER_MODAL';
+const UPDATE_USER = 'USER/UPDATE_USER';
 
 export const bootstrap = createAsyncThunk(BOOTSTRAP, (state, { dispatch }) => {
   storageService.setItem(STORAGE_USERS, mockUsers);
@@ -23,7 +26,17 @@ export const bootstrap = createAsyncThunk(BOOTSTRAP, (state, { dispatch }) => {
   }
 });
 
-export const newUser = createAction<User>(NEW_USER);
+export const newUser = createAction(NEW_USER);
+export const addUser = createAsyncThunk<User[], User>(ADD_USER, (newUser) => {
+  const allUsers = storageService.getItem<User[]>(STORAGE_USERS) ?? [];
+  newUser.id = allUsers.length + 1;
+
+  allUsers.push(newUser);
+  storageService.setItem(STORAGE_USERS, allUsers);
+
+  return allUsers;
+  // Mostrar tabela com esses usuarios atualizados
+});
 export const updateUser = createAsyncThunk<void, User>(
   UPDATE_USER,
   (userToUpdate) => {
@@ -53,3 +66,5 @@ export const setActiveUser = createAsyncThunk<
 export const userLogout = createAsyncThunk(LOGOUT_USER, () => {
   storageService.clearItem(STORAGE_ACTIVE_USER);
 });
+export const showUserModal = createAction<boolean>(SHOW_USER_MODAL);
+export const showMyProfileModal = createAction<boolean>(SHOW_MY_PROFILE_MODAL);

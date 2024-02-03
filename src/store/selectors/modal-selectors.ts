@@ -1,4 +1,4 @@
 import { RootState } from '..';
 
-export const selectShowMyProfileModal = (state: RootState) =>
-  state.modal.showMyProfile;
+// export const selectShowUserProfileModal = (state: RootState) =>
+//   state.modal.userProfile;
