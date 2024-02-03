@@ -8,17 +8,21 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { useAppSelector } from '../../../store';
+import { useAppDispatch, useAppSelector } from '../../../store';
 import { selectIsAdminUser } from '../../../store/selectors';
+import { showMyProfileModal } from '../../../store/actions/modal-actions';
 
 export const UsersTableToolbar = () => {
   const isAdmin = useAppSelector(selectIsAdminUser);
+  const dispatch = useAppDispatch();
   const toolbarSx: SxProps<Theme> = {
     pl: { sm: 2 },
     pr: { xs: 1, sm: 1 },
   };
 
-  const handleNewUser = () => {};
+  const handleNewUser = () => {
+    dispatch(showMyProfileModal(true));
+  };
 
   return (
     <Toolbar sx={toolbarSx}>

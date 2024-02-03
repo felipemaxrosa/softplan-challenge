@@ -18,7 +18,7 @@ import { Profile } from '../../../models/enums';
 import { User } from '../../../models/interfaces';
 import { PROFILE_SELECT_ITEMS } from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../store';
-import { showMyProfile } from '../../../store/actions/modal-actions';
+import { showMyProfileModal } from '../../../store/actions/modal-actions';
 import { setActiveUser, updateUser } from '../../../store/actions/user-actions';
 
 export const MyProfileModal = () => {
@@ -36,7 +36,7 @@ export const MyProfileModal = () => {
   const dispatch = useAppDispatch();
 
   const handleClose = () => {
-    dispatch(showMyProfile(false));
+    dispatch(showMyProfileModal(false));
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

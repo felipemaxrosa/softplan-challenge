@@ -11,8 +11,11 @@ const modalInitialState: ModalReducerState = {
 };
 
 export const modalsReducer = createReducer(modalInitialState, (userBuilder) => {
-  userBuilder.addCase(modalActions.showMyProfile, (state, { payload }) => ({
-    ...state,
-    showMyProfile: payload,
-  }));
+  userBuilder.addCase(
+    modalActions.showMyProfileModal,
+    (state, { payload }) => ({
+      ...state,
+      showMyProfile: payload,
+    })
+  );
 });

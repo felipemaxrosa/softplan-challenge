@@ -10,3 +10,4 @@ export const selectHasActiveUser = (state: RootState) =>
   state.user.activeUser !== undefined;
 export const selectIsAdminUser = (state: RootState) =>
   state.user.activeUser?.profile === Profile.ADMIN;
+export const selectIsEditing = (state: RootState) => state.user.editing;

@@ -5,34 +5,35 @@ import { MenuItem } from '../shared';
 import { useAppDispatch } from '../../store';
 import { AvatarIcon, LogoutIcon } from '../icons';
 import { UserAvatar, MyAccountMenu } from './Avatar.styles';
-import { setActiveUser } from '../../store/actions/user-actions';
-import { showMyProfile } from '../../store/actions/modal-actions';
+import { setActiveUser, userLogout } from '../../store/actions/user-actions';
+import { showMyProfileModal } from '../../store/actions/modal-actions';
 
 export const Avatar = ({ children }: PropsWithChildren) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const dispatch = useAppDispatch();
 
-  const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleUserAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleMyProfileClick = () => {
-    dispatch(showMyProfile(true));
-  };
-
-  const handleLogoutClick = () => {
-    dispatch(setActiveUser(undefined));
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
+  const handleMyProfileClick = () => {
+    dispatch(showMyProfileModal(true));
+    handleCloseUserMenu();
+  };
+
+  const handleLogoutClick = () => {
+    dispatch(userLogout());
+  };
+
   return (
     <Tooltip title="Account settings">
       <Fragment>
-        <IconButton onClick={handleAvatarClick} size="small">
+        <IconButton onClick={handleUserAvatarClick} size="small">
           <UserAvatar>{children}</UserAvatar>
         </IconButton>
 

@@ -10,6 +10,8 @@ import {
 } from '@mui/material';
 
 import { SortOrder, User, UserTableHeadCell } from '../../../models/interfaces';
+import { useAppSelector } from '../../../store';
+import { selectIsAdminUser } from '../../../store/selectors';
 
 interface UsersTableHeadProps {
   onRequestSort: (
@@ -27,6 +29,8 @@ export const UsersTableHead = ({
   order,
   orderBy,
 }: UsersTableHeadProps) => {
+  const isAdmin = useAppSelector(selectIsAdminUser);
+
   const createSortHandler =
     (property: keyof User) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
@@ -63,7 +67,8 @@ export const UsersTableHead = ({
             </TableCell>
           );
         })}
-        <TableCell align="right" padding="normal"></TableCell>
+
+        {isAdmin && <TableCell align="right" padding="normal" />}
       </TableRow>
     </TableHead>
   );
