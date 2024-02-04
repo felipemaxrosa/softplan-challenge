@@ -16,15 +16,15 @@ import {
   selectShowUserModal,
 } from '../../../store/selectors';
 import { Input, Select } from '../../form';
-import { Profile } from '../../../models/enums';
-import { User } from '../../../models/interfaces';
-import { PROFILE_SELECT_ITEMS } from '../../../constants';
-import { useAppDispatch, useAppSelector } from '../../../store';
 import {
   addUser,
   showMyProfileModal,
   updateUser,
 } from '../../../store/actions/user-actions';
+import { Profile } from '../../../models/enums';
+import { User } from '../../../models/interfaces';
+import { PROFILE_SELECT_ITEMS } from '../../../constants';
+import { useAppDispatch, useAppSelector } from '../../../store';
 
 const INITIAL_USER_STATE: User = {
   email: '',
@@ -41,6 +41,7 @@ export const UserModal = () => {
   const selectedUser = useAppSelector(selectSelectedUser);
   const activeUser = useAppSelector(selectActiveUser);
   const editingOwnProfile = isEditingUser && localUser?.id === activeUser?.id;
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isEditingUser && selectedUser) {
@@ -49,8 +50,6 @@ export const UserModal = () => {
       setLocalUser(INITIAL_USER_STATE);
     }
   }, [isEditingUser, selectedUser]);
-
-  const dispatch = useAppDispatch();
 
   const handleClose = () => {
     dispatch(showMyProfileModal(false));
@@ -89,6 +88,16 @@ export const UserModal = () => {
     if (!isEditingUser) return 'Novo Perfil';
     if (!editingOwnProfile) return 'Editar Perfil';
     return 'Meu Perfil';
+  };
+
+  const isValidatedUser = () => {
+    const { id, ...userWithoutID } = localUser;
+
+    const areAllFieldsFilled = Object.values(userWithoutID).every(
+      (value) => value.length > 0
+    );
+
+    return areAllFieldsFilled;
   };
 
   return (
@@ -144,7 +153,11 @@ export const UserModal = () => {
         <Button onClick={handleClose} variant="outlined">
           Fechar
         </Button>
-        <Button onClick={handleSave} variant="contained">
+        <Button
+          onClick={handleSave}
+          variant="contained"
+          disabled={!isValidatedUser()}
+        >
           Salvar
         </Button>
       </DialogActions>

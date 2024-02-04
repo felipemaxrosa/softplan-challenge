@@ -11,18 +11,18 @@ export const USER_TABLE_HEADS: UserTableHeadCell[] = [
     id: 'name',
     numeric: false,
     disablePadding: false,
-    label: 'Nome do usuario',
+    label: 'Nome do usuário',
   },
   {
     id: 'email',
     numeric: false,
     disablePadding: false,
-    label: 'Email do usuario',
+    label: 'Email do usuário',
   },
   {
     id: 'profile',
     numeric: false,
     disablePadding: false,
-    label: 'Perfil do usuario',
+    label: 'Perfil do usuário',
   },
 ];
