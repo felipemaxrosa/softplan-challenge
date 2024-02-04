@@ -15,3 +15,5 @@ export const selectShowUserModal = (state: RootState) =>
   state.user.showUserModal;
 export const selectSelectedUser = (state: RootState) => state.user.selectedUser;
 export const selectUsers = (state: RootState) => state.user.users;
+export const selectFilteredUsers = (state: RootState) =>
+  state.user.filteredUsers;

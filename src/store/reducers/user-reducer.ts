@@ -11,6 +11,7 @@ export interface UserReducerState {
   showUserModal: boolean;
   submitting: boolean;
   users: User[];
+  filteredUsers: User[];
 }
 
 const userInitialState: UserReducerState = {
@@ -19,6 +20,7 @@ const userInitialState: UserReducerState = {
   showUserModal: false,
   submitting: false,
   users: [],
+  filteredUsers: [],
 };
 
 export const userReducer = createReducer(userInitialState, (userBuilder) => {
@@ -53,6 +55,10 @@ export const userReducer = createReducer(userInitialState, (userBuilder) => {
     ...state,
     users: payload,
     loading: false,
+  }));
+  userBuilder.addCase(userActions.setFilteredUsers, (state, { payload }) => ({
+    ...state,
+    filteredUsers: state.users.filter((user) => user.name.includes(payload)),
   }));
   userBuilder.addCase(userActions.editUser, (state, { payload }) => ({
     ...state,

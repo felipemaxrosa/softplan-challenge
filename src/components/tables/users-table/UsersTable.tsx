@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   Box,
@@ -8,49 +8,32 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TablePagination,
   TableRow,
   Tooltip,
 } from '@mui/material';
-import { UsersTableHead } from './UsersTableHead';
-import { SortOrder, User } from '../../../models/interfaces';
-import { USER_TABLE_HEADS } from '../../../constants';
-import { UsersTableToolbar } from './UsersTableToolbar';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { getComparator, stableSort } from '../../../utils';
-import { useAppDispatch, useAppSelector } from '../../../store';
+
+import { UsersTableHead } from './UsersTableHead';
+import { User } from '../../../models/interfaces';
+import { USER_TABLE_HEADS } from '../../../constants';
+import { UsersTableToolbar } from './UsersTableToolbar';
 import { selectIsAdminUser } from '../../../store/selectors';
+import { useAppDispatch, useAppSelector } from '../../../store';
 import { deleteUser, editUser } from '../../../store/actions/user-actions';
 
 interface UsersTableProps {
   tableRows: User[];
 }
 export const UsersTable = ({ tableRows }: UsersTableProps) => {
-  const [order, setOrder] = useState<SortOrder>('asc');
-  const [orderBy, setOrderBy] = useState<keyof User>('id');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const dispatch = useAppDispatch();
-
   const isAdmin = useAppSelector(selectIsAdminUser);
-
-  const handleRequestSort = (property: keyof User) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
+  const dispatch = useAppDispatch();
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - tableRows.length) : 0;
-
-  // const sortedRows = useMemo(
-  //   () =>
-  //     stableSort(tableRows, getComparator(order, orderBy)).slice(
-  //       page * rowsPerPage,
-  //       page * rowsPerPage + rowsPerPage
-  //     ),
-  //   [order, orderBy, page, rowsPerPage, tableRows]
-  // );
 
   const handleEditClick = (user: User) => {
     dispatch(editUser(user));
@@ -58,18 +41,22 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
   const handleDeleteClick = (id: number) => {
     dispatch(deleteUser(id));
   };
+  const handleChangePage = (newPage: number) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   return (
     <Paper>
       <UsersTableToolbar />
       <TableContainer>
         <Table size="medium">
-          <UsersTableHead
-            order={order}
-            orderBy={orderBy}
-            onRequestSort={(_, property) => handleRequestSort(property)}
-            heads={USER_TABLE_HEADS}
-          />
+          <UsersTableHead heads={USER_TABLE_HEADS} />
 
           <TableBody>
             {tableRows.map((row) => (
@@ -87,7 +74,7 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
                       justifyContent="flex-end"
                       gap={1}
                     >
-                      <Tooltip title="Editar Usuario">
+                      <Tooltip title="Editar Usuário">
                         <IconButton
                           aria-label="edit"
                           onClick={() => handleEditClick(row)}
@@ -96,7 +83,7 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
                         </IconButton>
                       </Tooltip>
 
-                      <Tooltip title="Deletar Usuario">
+                      <Tooltip title="Deletar Usuário">
                         <IconButton
                           aria-label="delete"
                           onClick={() => handleDeleteClick(row.id!)}
@@ -109,9 +96,30 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
                 )}
               </TableRow>
             ))}
+
+            {emptyRows > 0 && (
+              <TableRow
+                style={{
+                  height: 53 * emptyRows,
+                }}
+              >
+                <TableCell colSpan={5} align="left" />
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
+
+      <TablePagination
+        labelRowsPerPage="Linhas por página"
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={tableRows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={(_, page) => handleChangePage(page)}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Paper>
   );
 };

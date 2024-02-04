@@ -7,7 +7,6 @@ import { AvatarIcon, LogoutIcon } from '../icons';
 import { UserAvatar, MyAccountMenu } from './Avatar.styles';
 import {
   showMyProfileModal,
-  showUserModal,
   userLogout,
 } from '../../store/actions/user-actions';
 

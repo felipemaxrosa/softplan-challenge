@@ -14,7 +14,8 @@ const LOGOUT_USER = 'USER/LOGOUT_USER';
 const NEW_USER = 'USER/NEW_USER';
 const ADD_USER = 'USER/ADD_USER';
 const SET_ACTIVE_USER = 'USER/SET_ACTIVE_USER';
-const SET_USERS = 'SET_USERS';
+const SET_USERS = 'USER/SET_USERS';
+const SET_FILTERED_USERS = 'USER/SET_FILTERED_USERS';
 const SHOW_MY_PROFILE_MODAL = 'USER/SHOW_MY_PROFILE_MODAL';
 const SHOW_USER_MODAL = 'USER/SHOW_USER_MODAL';
 const UPDATE_USER = 'USER/UPDATE_USER';
@@ -79,6 +80,7 @@ export const setActiveUser = createAsyncThunk<
   return user;
 });
 export const setUsers = createAction<User[]>(SET_USERS);
+export const setFilteredUsers = createAction<string>(SET_FILTERED_USERS);
 export const userLogout = createAsyncThunk(LOGOUT_USER, () => {
   storageService.clearItem(STORAGE_ACTIVE_USER);
 });

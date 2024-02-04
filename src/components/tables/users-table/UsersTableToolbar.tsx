@@ -1,44 +1,68 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  Box,
   Button,
-  Grid,
   SxProps,
+  TextField,
   Theme,
   Toolbar,
   Typography,
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { selectIsAdminUser } from '../../../store/selectors';
-import { newUser, showUserModal } from '../../../store/actions/user-actions';
+import { newUser, setFilteredUsers } from '../../../store/actions/user-actions';
+import { ToolbarContent } from './UsersTableToolbar.styles';
 
 export const UsersTableToolbar = () => {
+  const [search, setSearch] = useState('');
   const isAdmin = useAppSelector(selectIsAdminUser);
   const dispatch = useAppDispatch();
+
   const toolbarSx: SxProps<Theme> = {
     pl: { sm: 2 },
-    pr: { xs: 1, sm: 1 },
+    pr: { xs: 2, sm: 2 },
+    display: 'block',
   };
 
   const handleNewUser = () => {
     dispatch(newUser());
   };
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+
+    setSearch(value);
+  };
+
+  useEffect(() => {
+    dispatch(setFilteredUsers(search));
+  }, [dispatch, search]);
+
   return (
     <Toolbar sx={toolbarSx}>
-      <Grid container justifyContent="space-between">
-        <Typography variant="h6" component="div">
-          Usuarios
-        </Typography>
+      <Typography variant="h6" component="div" mt={1} mb={2} display="block">
+        Usuários
+      </Typography>
 
-        <Box display="flex" gap={1}>
-          {isAdmin && (
-            <Button variant="outlined" onClick={handleNewUser}>
-              Novo usuario
-            </Button>
-          )}
-        </Box>
-      </Grid>
+      <ToolbarContent>
+        <TextField
+          size="small"
+          fullWidth
+          label="Pesquisa usuário"
+          name="search"
+          value={search}
+          onChange={handleSearchChange}
+        />
+
+        {isAdmin && (
+          <Button
+            variant="outlined"
+            onClick={handleNewUser}
+            sx={{ height: 40, minWidth: 144 }}
+          >
+            Novo usuário
+          </Button>
+        )}
+      </ToolbarContent>
     </Toolbar>
   );
 };

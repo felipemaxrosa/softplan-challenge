@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { userService } from '../services';
 import { useAppDispatch, useAppSelector } from '../store';
 import { setUsers } from '../store/actions/user-actions';
-import { selectUsers } from '../store/selectors';
+import { selectFilteredUsers } from '../store/selectors';
 
 export const useUsers = () => {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const users = useAppSelector(selectUsers);
+  const users = useAppSelector(selectFilteredUsers);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

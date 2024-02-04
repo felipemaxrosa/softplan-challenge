@@ -22,7 +22,6 @@ import { PROFILE_SELECT_ITEMS } from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import {
   addUser,
-  setActiveUser,
   showMyProfileModal,
   updateUser,
 } from '../../../store/actions/user-actions';

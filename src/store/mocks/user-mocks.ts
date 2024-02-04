@@ -5,14 +5,14 @@ export const mockUsers: User[] = [
   {
     id: 1,
     email: 'admin@test.com',
-    password: '1234',
+    password: 'admin',
     name: 'admin',
     profile: Profile.ADMIN,
   },
   {
     id: 2,
     email: 'user@test.com',
-    password: '1234',
+    password: 'user',
     name: 'user',
     profile: Profile.USER,
   },
