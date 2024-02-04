@@ -41,7 +41,7 @@ export const UserModal = () => {
   const isEditingUser = useAppSelector(selectIsEditing);
   const selectedUser = useAppSelector(selectSelectedUser);
   const activeUser = useAppSelector(selectActiveUser);
-  const editingOwnProfile = isEditingUser && localUser?.id === selectedUser?.id;
+  const editingOwnProfile = isEditingUser && localUser?.id === activeUser?.id;
 
   useEffect(() => {
     if (isEditingUser && selectedUser) {
@@ -78,7 +78,6 @@ export const UserModal = () => {
 
   const handleSave = () => {
     if (isEditingUser) {
-      dispatch(setActiveUser(localUser));
       dispatch(updateUser(localUser));
     } else {
       dispatch(addUser(localUser));

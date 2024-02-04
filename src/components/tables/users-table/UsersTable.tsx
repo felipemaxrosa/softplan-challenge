@@ -18,8 +18,9 @@ import { UsersTableToolbar } from './UsersTableToolbar';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { getComparator, stableSort } from '../../../utils';
-import { useAppSelector } from '../../../store';
+import { useAppDispatch, useAppSelector } from '../../../store';
 import { selectIsAdminUser } from '../../../store/selectors';
+import { deleteUser, editUser } from '../../../store/actions/user-actions';
 
 interface UsersTableProps {
   tableRows: User[];
@@ -29,6 +30,7 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
   const [orderBy, setOrderBy] = useState<keyof User>('id');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const dispatch = useAppDispatch();
 
   const isAdmin = useAppSelector(selectIsAdminUser);
 
@@ -50,8 +52,12 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
   //   [order, orderBy, page, rowsPerPage, tableRows]
   // );
 
-  const handleEditClick = (user: User) => {};
-  const handleDeleteClick = (id?: number) => {};
+  const handleEditClick = (user: User) => {
+    dispatch(editUser(user));
+  };
+  const handleDeleteClick = (id: number) => {
+    dispatch(deleteUser(id));
+  };
 
   return (
     <Paper>
@@ -93,7 +99,7 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
                       <Tooltip title="Deletar Usuario">
                         <IconButton
                           aria-label="delete"
-                          onClick={() => handleDeleteClick(row.id)}
+                          onClick={() => handleDeleteClick(row.id!)}
                         >
                           <DeleteIcon />
                         </IconButton>

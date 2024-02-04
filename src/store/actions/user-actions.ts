@@ -1,5 +1,6 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
+import { RootState } from '..';
 import { mockUsers } from '../mocks';
 import { User } from '../../models/interfaces';
 import { storageService } from '../../services';
@@ -37,10 +38,10 @@ export const addUser = createAsyncThunk<User[], User>(ADD_USER, (newUser) => {
 
   return allUsers;
 });
-export const updateUser = createAsyncThunk<void, User>(
+export const updateUser = createAsyncThunk<User[], User>(
   UPDATE_USER,
-  (userToUpdate) => {
-    const allUsers = storageService.getItem<User[]>(STORAGE_USERS);
+  (userToUpdate, { getState }) => {
+    const allUsers = (getState() as RootState).user.users;
 
     const userIndex = allUsers?.findIndex(
       (user) => user.id === userToUpdate.id
@@ -52,10 +53,24 @@ export const updateUser = createAsyncThunk<void, User>(
       return user;
     });
     storageService.setItem(STORAGE_USERS, updatedUsers);
+
+    return updatedUsers as User[];
   }
 );
-export const editUser = createAction(EDIT_USER);
-export const deleteUser = createAction<{ id: number }>(DELETE_USER);
+export const editUser = createAction<User>(EDIT_USER);
+export const deleteUser = createAsyncThunk<User[], number>(
+  DELETE_USER,
+  (userId, { getState }) => {
+    const allUsers = (getState() as RootState).user.users;
+
+    const filteredUsers = allUsers?.filter((user) => {
+      return user.id !== userId;
+    });
+    storageService.setItem(STORAGE_USERS, filteredUsers);
+
+    return filteredUsers;
+  }
+);
 export const setActiveUser = createAsyncThunk<
   User | undefined,
   User | undefined

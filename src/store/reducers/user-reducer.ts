@@ -40,6 +40,7 @@ export const userReducer = createReducer(userInitialState, (userBuilder) => {
   userBuilder.addCase(userActions.newUser, (state) => ({
     ...state,
     showUserModal: true,
+    selectedUser: undefined,
     editing: false,
   }));
   userBuilder.addCase(userActions.showMyProfileModal, (state, { payload }) => ({
@@ -53,9 +54,31 @@ export const userReducer = createReducer(userInitialState, (userBuilder) => {
     users: payload,
     loading: false,
   }));
+  userBuilder.addCase(userActions.editUser, (state, { payload }) => ({
+    ...state,
+    selectedUser: payload,
+    editing: true,
+    showUserModal: true,
+  }));
+  userBuilder.addCase(
+    userActions.deleteUser.fulfilled,
+    (state, { payload }) => ({
+      ...state,
+      users: payload,
+    })
+  );
   userBuilder.addCase(userActions.addUser.fulfilled, (state, { payload }) => ({
     ...state,
     users: payload,
     selectedUser: undefined,
   }));
+  userBuilder.addCase(
+    userActions.updateUser.fulfilled,
+    (state, { payload }) => ({
+      ...state,
+      users: payload,
+      selectedUser: undefined,
+      editing: false,
+    })
+  );
 });
