@@ -55,6 +55,7 @@ export const UserModal = () => {
 
   const handleClose = () => {
     dispatch(showMyProfileModal(false));
+    setLocalUser(INITIAL_USER_STATE);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

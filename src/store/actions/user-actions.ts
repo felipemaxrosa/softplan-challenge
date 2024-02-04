@@ -13,6 +13,7 @@ const LOGOUT_USER = 'USER/LOGOUT_USER';
 const NEW_USER = 'USER/NEW_USER';
 const ADD_USER = 'USER/ADD_USER';
 const SET_ACTIVE_USER = 'USER/SET_ACTIVE_USER';
+const SET_USERS = 'SET_USERS';
 const SHOW_MY_PROFILE_MODAL = 'USER/SHOW_MY_PROFILE_MODAL';
 const SHOW_USER_MODAL = 'USER/SHOW_USER_MODAL';
 const UPDATE_USER = 'USER/UPDATE_USER';
@@ -35,7 +36,6 @@ export const addUser = createAsyncThunk<User[], User>(ADD_USER, (newUser) => {
   storageService.setItem(STORAGE_USERS, allUsers);
 
   return allUsers;
-  // Mostrar tabela com esses usuarios atualizados
 });
 export const updateUser = createAsyncThunk<void, User>(
   UPDATE_USER,
@@ -63,6 +63,7 @@ export const setActiveUser = createAsyncThunk<
   storageService.setItem(STORAGE_ACTIVE_USER, user);
   return user;
 });
+export const setUsers = createAction<User[]>(SET_USERS);
 export const userLogout = createAsyncThunk(LOGOUT_USER, () => {
   storageService.clearItem(STORAGE_ACTIVE_USER);
 });

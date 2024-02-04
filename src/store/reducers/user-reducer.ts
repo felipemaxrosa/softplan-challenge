@@ -48,4 +48,14 @@ export const userReducer = createReducer(userInitialState, (userBuilder) => {
     editing: payload,
     selectedUser: payload ? state.activeUser : undefined,
   }));
+  userBuilder.addCase(userActions.setUsers, (state, { payload }) => ({
+    ...state,
+    users: payload,
+    loading: false,
+  }));
+  userBuilder.addCase(userActions.addUser.fulfilled, (state, { payload }) => ({
+    ...state,
+    users: payload,
+    selectedUser: undefined,
+  }));
 });
