@@ -21,6 +21,7 @@ export const UsersTableToolbar = () => {
     pl: { sm: 2 },
     pr: { xs: 2, sm: 2 },
     display: 'block',
+    pt: 1,
   };
 
   const handleNewUser = () => {
@@ -39,7 +40,7 @@ export const UsersTableToolbar = () => {
 
   return (
     <Toolbar sx={toolbarSx}>
-      <Typography variant="h6" component="div" mt={1} mb={2} display="block">
+      <Typography variant="h6" component="div" mb={2} display="block">
         Usuários
       </Typography>
 

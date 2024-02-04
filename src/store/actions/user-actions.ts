@@ -30,16 +30,16 @@ export const bootstrap = createAsyncThunk(BOOTSTRAP, (state, { dispatch }) => {
 });
 
 export const newUser = createAction(NEW_USER);
-export const addUser = createAsyncThunk<User[], User>(ADD_USER, (newUser) => {
+export const addUser = createAsyncThunk<User, User>(ADD_USER, (newUser) => {
   const allUsers = storageService.getItem<User[]>(STORAGE_USERS) ?? [];
   newUser.id = allUsers.length + 1;
 
   allUsers.push(newUser);
   storageService.setItem(STORAGE_USERS, allUsers);
 
-  return allUsers;
+  return newUser;
 });
-export const updateUser = createAsyncThunk<User[], User>(
+export const updateUser = createAsyncThunk<User, User>(
   UPDATE_USER,
   (userToUpdate, { getState }) => {
     const allUsers = (getState() as RootState).user.users;
@@ -55,7 +55,7 @@ export const updateUser = createAsyncThunk<User[], User>(
     });
     storageService.setItem(STORAGE_USERS, updatedUsers);
 
-    return updatedUsers as User[];
+    return userToUpdate;
   }
 );
 export const editUser = createAction<User>(EDIT_USER);

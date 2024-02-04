@@ -75,14 +75,20 @@ export const userReducer = createReducer(userInitialState, (userBuilder) => {
   );
   userBuilder.addCase(userActions.addUser.fulfilled, (state, { payload }) => ({
     ...state,
-    users: payload,
+    users: [...state.users, payload],
+    filteredUsers: [...state.filteredUsers, payload],
     selectedUser: undefined,
   }));
   userBuilder.addCase(
     userActions.updateUser.fulfilled,
     (state, { payload }) => ({
       ...state,
-      users: payload,
+      filteredUsers: state.filteredUsers.map((user) =>
+        user.id !== payload.id ? user : payload
+      ),
+      users: state.users.map((user) =>
+        user.id !== payload.id ? user : payload
+      ),
       selectedUser: undefined,
       editing: false,
     })
