@@ -79,3 +79,5 @@ Para que um usuário de nível `ADMIN` possa deletar um outro usuário, ele deve
 
 E depois o usuário sera removido da tabela e tambem o `localStorage` onde os dados estao sendo persistidos:
 ![deletar-usuario](docs/images/deletar-usuario.jpeg)
+
+`INFO:` O usuário logado não pode excluir o mesmo.

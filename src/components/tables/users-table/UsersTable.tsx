@@ -19,7 +19,7 @@ import { UsersTableHead } from './UsersTableHead';
 import { User } from '../../../models/interfaces';
 import { USER_TABLE_HEADS } from '../../../constants';
 import { UsersTableToolbar } from './UsersTableToolbar';
-import { selectIsAdminUser } from '../../../store/selectors';
+import { selectActiveUser, selectIsAdminUser } from '../../../store/selectors';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { deleteUser, editUser } from '../../../store/actions/user-actions';
 
@@ -30,6 +30,7 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const isAdmin = useAppSelector(selectIsAdminUser);
+  const activeUser = useAppSelector(selectActiveUser);
   const dispatch = useAppDispatch();
 
   const emptyRows =
@@ -83,14 +84,16 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
                         </IconButton>
                       </Tooltip>
 
-                      <Tooltip title="Deletar Usuário">
-                        <IconButton
-                          aria-label="delete"
-                          onClick={() => handleDeleteClick(row.id!)}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Tooltip>
+                      {activeUser?.id !== row.id && (
+                        <Tooltip title="Deletar Usuário">
+                          <IconButton
+                            aria-label="delete"
+                            onClick={() => handleDeleteClick(row.id!)}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </Tooltip>
+                      )}
                     </Box>
                   </TableCell>
                 )}
