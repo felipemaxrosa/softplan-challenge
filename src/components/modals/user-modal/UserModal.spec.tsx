@@ -2,7 +2,7 @@ import { Provider, useSelector } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 
 import store from '../../../store';
-import { MyProfileModal } from './MyProfileModal';
+import { UserModal } from './UserModal';
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
@@ -12,13 +12,13 @@ jest.mock('react-redux', () => ({
 const Component = () => {
   return (
     <Provider store={store}>
-      <MyProfileModal />
+      <UserModal />
     </Provider>
   );
 };
 const useSelectorMock = useSelector as jest.MockedFunction<typeof useSelector>;
 
-describe('MyProfileModal', () => {
+describe('UserModal', () => {
   beforeEach(() => {
     useSelectorMock.mockClear();
   });

@@ -1,65 +1,67 @@
-import React, {
-  Fragment,
-  PropsWithChildren,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { Fragment, PropsWithChildren, useState } from 'react';
 import { Divider, IconButton, Tooltip } from '@mui/material';
 
 import { MenuItem } from '../shared';
 import { useAppDispatch } from '../../store';
 import { AvatarIcon, LogoutIcon } from '../icons';
-import { UserAvatar, AccountMenu } from './Avatar.styles';
-import { setActiveUser } from '../../store/actions/user-actions';
-import { showMyProfile } from '../../store/actions/modal-actions';
+import { UserAvatar, MyAccountMenu } from './Avatar.styles';
+import {
+  showMyProfileModal,
+  userLogout,
+} from '../../store/actions/user-actions';
 
 export const Avatar = ({ children }: PropsWithChildren) => {
-  const [open, setOpen] = useState(false);
-  const dispatch = useAppDispatch();
-  const menuRef = useRef<HTMLDivElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-  const handleAvatarClick = () => {
-    setOpen(!open);
+  const dispatch = useAppDispatch();
+
+  const handleUserAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
 
   const handleMyProfileClick = () => {
-    dispatch(showMyProfile(true));
-    setOpen(false);
+    dispatch(showMyProfileModal(true));
+    handleCloseUserMenu();
   };
 
   const handleLogoutClick = () => {
-    dispatch(setActiveUser(undefined));
+    dispatch(userLogout());
   };
-
-  const handleClickOutside = (event: any) => {
-    if (!menuRef?.current?.contains(event.target)) {
-      setOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true);
-  }, []);
 
   return (
     <Tooltip title="Account settings">
       <Fragment>
-        <IconButton onClick={handleAvatarClick} size="small" sx={{ ml: 2 }}>
+        <IconButton onClick={handleUserAvatarClick} size="small">
           <UserAvatar>{children}</UserAvatar>
         </IconButton>
 
-        {open && (
-          <AccountMenu ref={menuRef}>
-            <MenuItem onClick={handleMyProfileClick}>
-              <AvatarIcon /> Meu Perfil
-            </MenuItem>
-            <Divider />
-            <MenuItem onClick={handleLogoutClick}>
-              <LogoutIcon fontSize="small" /> Logout
-            </MenuItem>
-          </AccountMenu>
-        )}
+        <MyAccountMenu
+          id="menu-my-account"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          <MenuItem onClick={handleMyProfileClick}>
+            <AvatarIcon /> Meu Perfil
+          </MenuItem>
+          <Divider />
+          <MenuItem onClick={handleLogoutClick}>
+            <LogoutIcon fontSize="small" /> Logout
+          </MenuItem>
+        </MyAccountMenu>
       </Fragment>
     </Tooltip>
   );

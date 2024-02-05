@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# Softplan Challenge UNIC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto foi desenvolvido para avaliação do processo seletivo para desenvolvedor da UNIC.
 
-## Available Scripts
+## 🚀 Instalação de Dependências
 
-In the project directory, you can run:
+```bash
+yarn install
+```
 
-### `npm start`
+## ⚡️ Executando a Aplicação
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+yarn start
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Usando a Aplicação
 
-### `npm test`
+Ao acessar a aplicação, o usuário será direcionado automaticamente para uma tela de login, onde temos a princípio dois usuários pré-cadastrados que podem ser utilizados com o seguinte acesso:
+![tela-login](docs/images/tela-login.jpeg)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Usuário com acesso `ADMIN` (completo):
 
-### `npm run build`
+```
+Usuário: admin
+Senha: admin
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Usuário com acesso `USER` (limitado)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+Usuário: user
+Senha: user
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+O usuário que tem acesso `ADMIN` pode executar ações como:
 
-### `npm run eject`
+- Criar um novo usuário
+- Editar um usuário
+- Excluir um usuário
+- Consultar usuários
+  ![tela-usuario-admin](docs/images/tela-usuario-admin.jpeg)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+O usuário que tem acesso `USER` pode executar ações como:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Editar seu próprio perfil, com exceção de mudar a si próprio para um usuário de nível `ADMIN`
+- Consultar outros usuários
+  ![tela-usuario-user](docs/images/tela-usuario-user.jpeg)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Editando o próprio perfil
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Para que um usuário possa editar seu próprio perfil, basta ele clicar no Avatar que contém a inicial do seu usuário, no canto superior direito da tela e clicar em `Meu Perfil`:
+![meu-perfil-acesso](docs/images/meu-perfil-acesso.jpeg)
 
-## Learn More
+E depois disso um modal irá se abrir onde o usuário poderá fazer as edições que desejar:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![meu-perfil](docs/images/meu-perfil.jpeg)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Cadastrando um novo usuário
+
+Para que um usuário de nível `ADMIN` possa cadastrar um outro usuário, ele deve clicar no botao `NOVO USUARIO` ao lado direito da barra de pesquisa:
+![novo-usuario-botao](docs/images/novo-usuario-botao.jpeg)
+
+E depois disso um modal irá se abrir onde o usuário poderá adicionar um novo usuário:
+![novo-usuario](docs/images/novo-usuario.jpeg)
+
+### Editando um novo usuário
+
+Para que um usuário de nível `ADMIN` possa editar um outro usuário, ele deve clicar no botao com icone de lapis chamado `Editar Usuário` que fica localizado no final de cada linha da tabela e representa o usuário da linha.
+![editar-usuario-botao](docs/images/editar-usuario-botao.jpeg)
+
+E depois disso um modal irá se abrir onde o usuário poderá editar um usuário:
+![editar-usuario](docs/images/editar-usuario.jpeg)
+
+### Deletando um usuário
+
+Para que um usuário de nível `ADMIN` possa deletar um outro usuário, ele deve clicar no botao com icone de lixeira chamado `Deletar Usuário` que fica localizado no final de cada linha da tabela e representa o usuário da linha.
+![deletar-usuario-botao](docs/images/deletar-usuario-botao.jpeg)
+
+E depois o usuário sera removido da tabela e tambem o `localStorage` onde os dados estao sendo persistidos:
+![deletar-usuario](docs/images/deletar-usuario.jpeg)
+
+`INFO:` O usuário logado não pode excluir o mesmo.

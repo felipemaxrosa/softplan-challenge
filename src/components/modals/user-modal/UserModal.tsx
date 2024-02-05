@@ -11,32 +11,49 @@ import {
 
 import {
   selectActiveUser,
-  selectShowMyProfileModal,
+  selectIsEditing,
+  selectSelectedUser,
+  selectShowUserModal,
 } from '../../../store/selectors';
 import { Input, Select } from '../../form';
+import {
+  addUser,
+  showMyProfileModal,
+  updateUser,
+} from '../../../store/actions/user-actions';
 import { Profile } from '../../../models/enums';
 import { User } from '../../../models/interfaces';
 import { PROFILE_SELECT_ITEMS } from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../store';
-import { showMyProfile } from '../../../store/actions/modal-actions';
-import { setActiveUser, updateUser } from '../../../store/actions/user-actions';
 
-export const MyProfileModal = () => {
-  const open = useAppSelector(selectShowMyProfileModal);
+const INITIAL_USER_STATE: User = {
+  email: '',
+  name: '',
+  password: '',
+  profile: Profile.USER,
+};
+
+export const UserModal = () => {
+  const [localUser, setLocalUser] = useState(INITIAL_USER_STATE);
+
+  const open = useAppSelector(selectShowUserModal);
+  const isEditingUser = useAppSelector(selectIsEditing);
+  const selectedUser = useAppSelector(selectSelectedUser);
   const activeUser = useAppSelector(selectActiveUser);
-
-  const [localUser, setLocalUser] = useState({} as User);
-
-  useEffect(() => {
-    if (activeUser) {
-      setLocalUser(activeUser);
-    }
-  }, [activeUser]);
-
+  const editingOwnProfile = isEditingUser && localUser?.id === activeUser?.id;
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    if (isEditingUser && selectedUser) {
+      setLocalUser(selectedUser);
+    } else {
+      setLocalUser(INITIAL_USER_STATE);
+    }
+  }, [isEditingUser, selectedUser]);
+
   const handleClose = () => {
-    dispatch(showMyProfile(false));
+    dispatch(showMyProfileModal(false));
+    setLocalUser(INITIAL_USER_STATE);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,10 +75,29 @@ export const MyProfileModal = () => {
   };
 
   const handleSave = () => {
-    dispatch(setActiveUser(localUser));
-    dispatch(updateUser(localUser));
+    if (isEditingUser) {
+      dispatch(updateUser(localUser));
+    } else {
+      dispatch(addUser(localUser));
+    }
 
     handleClose();
+  };
+
+  const getDialogTitle = () => {
+    if (!isEditingUser) return 'Novo Usuário';
+    if (!editingOwnProfile) return 'Editar Usuário';
+    return 'Meu Perfil';
+  };
+
+  const isValidatedUser = () => {
+    const { id, ...userWithoutID } = localUser;
+
+    const areAllFieldsFilled = Object.values(userWithoutID).every(
+      (value) => value.length > 0
+    );
+
+    return areAllFieldsFilled;
   };
 
   return (
@@ -72,7 +108,7 @@ export const MyProfileModal = () => {
       fullWidth
       onClose={handleClose}
     >
-      <DialogTitle>Meu Perfil</DialogTitle>
+      <DialogTitle>{getDialogTitle()}</DialogTitle>
       <DialogContent sx={{ padding: '32px 24px' }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -117,7 +153,11 @@ export const MyProfileModal = () => {
         <Button onClick={handleClose} variant="outlined">
           Fechar
         </Button>
-        <Button onClick={handleSave} variant="contained">
+        <Button
+          onClick={handleSave}
+          variant="contained"
+          disabled={!isValidatedUser()}
+        >
           Salvar
         </Button>
       </DialogActions>

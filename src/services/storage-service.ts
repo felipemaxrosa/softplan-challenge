@@ -3,9 +3,13 @@ function setItem<T = any>(key: string, value: T) {
 }
 
 function getItem<T>(key: string) {
-  const values = localStorage.getItem(key);
+  const value = localStorage.getItem(key);
 
-  if (values) return JSON.parse(values) as T;
+  if (value) return JSON.parse(value) as T;
 }
 
-export { setItem, getItem };
+function clearItem(key: string) {
+  localStorage.removeItem(key);
+}
+
+export { setItem, getItem, clearItem };

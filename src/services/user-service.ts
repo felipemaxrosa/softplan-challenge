@@ -1,6 +1,6 @@
 import { storageService } from '.';
 import { User } from '../models/interfaces';
-import { STORAGE_USERS } from '../constants';
+import { STORAGE_ACTIVE_USER, STORAGE_USERS } from '../constants';
 
 interface Credentials {
   name: string;
@@ -17,4 +17,14 @@ const validateCredentials = ({ name, password }: Credentials): User | null => {
   return validUser;
 };
 
-export { validateCredentials };
+const getUsers = () => {
+  const users = storageService.getItem<User[]>(STORAGE_USERS) ?? [];
+
+  return users;
+};
+
+const logout = () => {
+  storageService.clearItem(STORAGE_ACTIVE_USER);
+};
+
+export { validateCredentials, getUsers, logout };

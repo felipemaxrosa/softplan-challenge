@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 
 import { LayoutApp } from '../layout-app';
-import { MyProfileModal } from '../modals';
+import { UserModal } from '../modals';
 import { ROUTES } from '../../models/enums';
 import { useAppSelector } from '../../store';
 import { ProtectiveRoutes } from '../protective-routes';
@@ -33,7 +33,7 @@ export function App() {
           />
         </Routes>
 
-        <MyProfileModal />
+        <UserModal />
       </LayoutApp>
     </BrowserRouter>
   );

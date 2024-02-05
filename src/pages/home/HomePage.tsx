@@ -1,5 +1,13 @@
 import React from 'react';
+import { UsersTable } from '../../components/tables';
+import { useUsers } from '../../hooks';
 
 export const HomePage = () => {
-  return <div data-testid="home-page">HomePage</div>;
+  const { users } = useUsers();
+
+  return (
+    <div data-testid="home-page">
+      <UsersTable tableRows={users} />
+    </div>
+  );
 };

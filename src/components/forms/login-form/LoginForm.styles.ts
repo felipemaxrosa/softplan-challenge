@@ -11,5 +11,6 @@ export const FormPaper = styled(Paper)`
   &.MuiPaper-root {
     max-width: 360px;
     margin: auto;
+    margin-top: 240px;
   }
 `;
