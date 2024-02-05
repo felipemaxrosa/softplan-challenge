@@ -47,7 +47,7 @@ O usuário que tem acesso `USER` pode executar ações como:
 - Consultar outros usuários
   ![tela-usuario-user](docs/images/tela-usuario-user.jpeg)
 
-### Editando o proprio perfil
+### Editando o próprio perfil
 
 Para que um usuário possa editar seu próprio perfil, basta ele clicar no Avatar que contém a inicial do seu usuário, no canto superior direito da tela e clicar em `Meu Perfil`:
 ![meu-perfil-acesso](docs/images/meu-perfil-acesso.jpeg)
@@ -55,3 +55,11 @@ Para que um usuário possa editar seu próprio perfil, basta ele clicar no Avata
 E depois disso um modal irá se abrir onde o usuário poderá fazer as edições que desejar:
 
 ![meu-perfil](docs/images/meu-perfil.jpeg)
+
+### Cadastrando um novo usuário
+
+Para que um usuário de nível `ADMIN` possa cadastrar um outro usuário, ele deve clicar no botao `NOVO USUARIO` ao lado direito da barra de pesquisa:
+![novo-usuario-botao](docs/images/novo-usuario-botao.jpeg)
+
+E depois disso um modal irá se abrir onde o usuário poderá adicionar um novo usuário:
+![novo-usuario](docs/images/novo-usuario.jpeg)
