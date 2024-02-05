@@ -14,4 +14,6 @@ export const Header = styled.header`
   justify-content: space-between;
 
   color: #ffffff;
+
+  z-index: 10;
 `;
