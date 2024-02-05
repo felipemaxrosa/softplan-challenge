@@ -7,7 +7,7 @@ import { ROUTES } from '../../models/enums';
 import { useAppSelector } from '../../store';
 import { ProtectiveRoutes } from '../protective-routes';
 import { selectHasActiveUser } from '../../store/selectors';
-import { HomePage, LoginPage, NotFoundPage } from '../../pages';
+import { HomePage, LoginPage } from '../../pages';
 
 export function App() {
   const hasActiveUser = useAppSelector(selectHasActiveUser);
@@ -24,7 +24,6 @@ export function App() {
               </ProtectiveRoutes>
             }
           />
-          <Route path={ROUTES.OTHERS} element={<NotFoundPage />} />
           <Route
             path={ROUTES.LOGIN}
             element={
