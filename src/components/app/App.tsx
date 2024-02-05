@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route, HashRouter, Navigate } from 'react-router-dom';
 
 import { LayoutApp } from '../layout-app';
-import { UserModal } from '../modals';
+import { AlertModal, UserModal } from '../modals';
 import { ROUTES } from '../../models/enums';
 import { useAppSelector } from '../../store';
 import { ProtectiveRoutes } from '../protective-routes';
@@ -33,6 +33,7 @@ export function App() {
         </Routes>
 
         <UserModal />
+        <AlertModal />
       </LayoutApp>
     </HashRouter>
   );

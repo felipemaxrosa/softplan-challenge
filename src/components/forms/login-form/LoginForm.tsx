@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, Input } from '../../form';
+import { Input } from '../../form';
 import { ROUTES } from '../../../models/enums';
 import { userService } from '../../../services';
 import { useAppDispatch } from '../../../store';
 import { FormContainer, FormPaper } from './LoginForm.styles';
 import { setActiveUser } from '../../../store/actions/user-actions';
+import { setAlertModal } from '../../../store/actions/modal-actions';
 
 export const LoginForm = () => {
   const [state, setState] = useState({ name: '', password: '' });
@@ -30,11 +31,17 @@ export const LoginForm = () => {
     });
 
     if (!user) {
-      alert('User NOT FOUND');
+      dispatch(
+        setAlertModal({ open: true, message: 'Usuário não encontrado' })
+      );
     } else {
       dispatch(setActiveUser(user));
       navigate(ROUTES.HOME);
     }
+  };
+
+  const isValidatedData = () => {
+    return Object.values(state).every((value) => value.length > 0);
   };
 
   return (
@@ -67,6 +74,7 @@ export const LoginForm = () => {
                 variant="contained"
                 fullWidth
                 onClick={handleLoginButtonClick}
+                disabled={!isValidatedData()}
               >
                 Login
               </Button>
