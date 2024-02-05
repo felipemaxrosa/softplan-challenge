@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, HashRouter, Navigate } from 'react-router-dom';
 
 import { LayoutApp } from '../layout-app';
 import { UserModal } from '../modals';
@@ -13,7 +13,7 @@ export function App() {
   const hasActiveUser = useAppSelector(selectHasActiveUser);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <LayoutApp>
         <Routes>
           <Route
@@ -35,7 +35,7 @@ export function App() {
 
         <UserModal />
       </LayoutApp>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
