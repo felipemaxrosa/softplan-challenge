@@ -1,14 +1,14 @@
-import React, { Fragment, PropsWithChildren, useState } from 'react';
-import { Divider, IconButton, Tooltip } from '@mui/material';
+import React, { PropsWithChildren, useState } from 'react';
+import { Divider, IconButton } from '@mui/material';
 
 import { MenuItem } from '../shared';
-import { useAppDispatch } from '../../store';
-import { AvatarIcon, LogoutIcon } from '../icons';
-import { UserAvatar, MyAccountMenu } from './Avatar.styles';
 import {
   showMyProfileModal,
   userLogout,
 } from '../../store/actions/user-actions';
+import { useAppDispatch } from '../../store';
+import { AvatarIcon, LogoutIcon } from '../icons';
+import { UserAvatar, MyAccountMenu } from './Avatar.styles';
 
 export const Avatar = ({ children }: PropsWithChildren) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -33,36 +33,34 @@ export const Avatar = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <Tooltip title="Account settings">
-      <Fragment>
-        <IconButton onClick={handleUserAvatarClick} size="small">
-          <UserAvatar>{children}</UserAvatar>
-        </IconButton>
+    <div data-testid="avatar">
+      <IconButton onClick={handleUserAvatarClick} size="small">
+        <UserAvatar>{children}</UserAvatar>
+      </IconButton>
 
-        <MyAccountMenu
-          id="menu-my-account"
-          anchorEl={anchorElUser}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
-        >
-          <MenuItem onClick={handleMyProfileClick}>
-            <AvatarIcon /> Meu Perfil
-          </MenuItem>
-          <Divider />
-          <MenuItem onClick={handleLogoutClick}>
-            <LogoutIcon fontSize="small" /> Logout
-          </MenuItem>
-        </MyAccountMenu>
-      </Fragment>
-    </Tooltip>
+      <MyAccountMenu
+        data-testid="menu-my-account"
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+      >
+        <MenuItem onClick={handleMyProfileClick}>
+          <AvatarIcon /> Meu Perfil
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={handleLogoutClick}>
+          <LogoutIcon fontSize="small" /> Logout
+        </MenuItem>
+      </MyAccountMenu>
+    </div>
   );
 };

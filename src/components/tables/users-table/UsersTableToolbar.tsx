@@ -7,8 +7,8 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../../store';
 import { selectIsAdminUser } from '../../../store/selectors';
+import { useAppDispatch, useAppSelector } from '../../../store';
 import { newUser, setFilteredUsers } from '../../../store/actions/user-actions';
 import { ToolbarContent } from './UsersTableToolbar.styles';
 
@@ -39,7 +39,7 @@ export const UsersTableToolbar = () => {
   }, [dispatch, search]);
 
   return (
-    <Toolbar sx={toolbarSx}>
+    <Toolbar sx={toolbarSx} data-testid="users-table-toolbar">
       <Typography variant="h6" component="div" mb={2} display="block">
         Usuários
       </Typography>
@@ -56,6 +56,7 @@ export const UsersTableToolbar = () => {
 
         {isAdmin && (
           <Button
+            data-testid="button-new-user"
             variant="outlined"
             onClick={handleNewUser}
             sx={{ height: 40, minWidth: 144 }}

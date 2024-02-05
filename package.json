@@ -34,6 +34,7 @@
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:cov": "yarn test --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts,tsx}' --collectCoverageFrom='src/components/**/**/*.{ts,tsx}'  --collectCoverageFrom='!src/components/**/index.{ts,tsx}'  --collectCoverageFrom='!src/components/**/**/index.{ts,tsx}' --collectCoverageFrom='!src/components/app/App.tsx'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

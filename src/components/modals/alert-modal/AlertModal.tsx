@@ -6,8 +6,8 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../../store';
 import { selectAlertModal } from '../../../store/selectors';
+import { useAppDispatch, useAppSelector } from '../../../store';
 import { closeAlertModal } from '../../../store/actions/modal-actions';
 
 export const AlertModal = () => {
