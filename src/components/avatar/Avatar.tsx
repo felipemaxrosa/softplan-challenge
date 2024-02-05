@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useState } from 'react';
-import { Divider, IconButton, Tooltip } from '@mui/material';
+import { Divider, IconButton } from '@mui/material';
 
 import { MenuItem } from '../shared';
 import { useAppDispatch } from '../../store';
@@ -33,36 +33,34 @@ export const Avatar = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <Tooltip title="Account settings">
-      <div data-testid="avatar">
-        <IconButton onClick={handleUserAvatarClick} size="small">
-          <UserAvatar>{children}</UserAvatar>
-        </IconButton>
+    <div data-testid="avatar">
+      <IconButton onClick={handleUserAvatarClick} size="small">
+        <UserAvatar>{children}</UserAvatar>
+      </IconButton>
 
-        <MyAccountMenu
-          data-testid="menu-my-account"
-          anchorEl={anchorElUser}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
-        >
-          <MenuItem onClick={handleMyProfileClick}>
-            <AvatarIcon /> Meu Perfil
-          </MenuItem>
-          <Divider />
-          <MenuItem onClick={handleLogoutClick}>
-            <LogoutIcon fontSize="small" /> Logout
-          </MenuItem>
-        </MyAccountMenu>
-      </div>
-    </Tooltip>
+      <MyAccountMenu
+        data-testid="menu-my-account"
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+      >
+        <MenuItem onClick={handleMyProfileClick}>
+          <AvatarIcon /> Meu Perfil
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={handleLogoutClick}>
+          <LogoutIcon fontSize="small" /> Logout
+        </MenuItem>
+      </MyAccountMenu>
+    </div>
   );
 };
