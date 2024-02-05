@@ -14,7 +14,7 @@ export const LayoutHeader = () => {
   const hasActiveUser = useAppSelector(selectHasActiveUser);
 
   return (
-    <Header>
+    <Header data-testid="app-layout-header">
       <SoftplanImage />
       {hasActiveUser && <Avatar>{userInitialLetter}</Avatar>}
     </Header>

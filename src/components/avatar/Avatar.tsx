@@ -1,4 +1,4 @@
-import React, { Fragment, PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { Divider, IconButton, Tooltip } from '@mui/material';
 
 import { MenuItem } from '../shared';
@@ -34,13 +34,13 @@ export const Avatar = ({ children }: PropsWithChildren) => {
 
   return (
     <Tooltip title="Account settings">
-      <Fragment>
+      <div data-testid="avatar">
         <IconButton onClick={handleUserAvatarClick} size="small">
           <UserAvatar>{children}</UserAvatar>
         </IconButton>
 
         <MyAccountMenu
-          id="menu-my-account"
+          data-testid="menu-my-account"
           anchorEl={anchorElUser}
           anchorOrigin={{
             vertical: 'top',
@@ -62,7 +62,7 @@ export const Avatar = ({ children }: PropsWithChildren) => {
             <LogoutIcon fontSize="small" /> Logout
           </MenuItem>
         </MyAccountMenu>
-      </Fragment>
+      </div>
     </Tooltip>
   );
 };
