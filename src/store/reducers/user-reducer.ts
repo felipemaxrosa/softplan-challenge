@@ -91,6 +91,8 @@ export const userReducer = createReducer(userInitialState, (userBuilder) => {
         user.id !== payload.id ? user : payload
       ),
       selectedUser: undefined,
+      activeUser:
+        state.activeUser?.id === payload.id ? payload : state.activeUser,
       editing: false,
     })
   );
