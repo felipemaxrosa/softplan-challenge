@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/felipemaxrosa/softplan-challenge/static/css/main.84094273.css",
+    "main.js": "/felipemaxrosa/softplan-challenge/static/js/main.7e024527.js",
+    "index.html": "/felipemaxrosa/softplan-challenge/index.html",
+    "main.84094273.css.map": "/felipemaxrosa/softplan-challenge/static/css/main.84094273.css.map",
+    "main.7e024527.js.map": "/felipemaxrosa/softplan-challenge/static/js/main.7e024527.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.84094273.css",
+    "static/js/main.7e024527.js"
+  ]
+}
