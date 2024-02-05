@@ -1,13 +1,13 @@
 import { Provider, Selector, useSelector } from 'react-redux';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import store from '../../../store';
 import {
   selectActiveUser,
   selectIsEditing,
   selectSelectedUser,
   selectShowUserModal,
 } from '../../../store/selectors';
+import store from '../../../store';
 import { UserModal } from './UserModal';
 import { Profile } from '../../../models/enums';
 import { User } from '../../../models/interfaces';

@@ -2,13 +2,13 @@ import React, { PropsWithChildren, useState } from 'react';
 import { Divider, IconButton } from '@mui/material';
 
 import { MenuItem } from '../shared';
-import { useAppDispatch } from '../../store';
-import { AvatarIcon, LogoutIcon } from '../icons';
-import { UserAvatar, MyAccountMenu } from './Avatar.styles';
 import {
   showMyProfileModal,
   userLogout,
 } from '../../store/actions/user-actions';
+import { useAppDispatch } from '../../store';
+import { AvatarIcon, LogoutIcon } from '../icons';
+import { UserAvatar, MyAccountMenu } from './Avatar.styles';
 
 export const Avatar = ({ children }: PropsWithChildren) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);

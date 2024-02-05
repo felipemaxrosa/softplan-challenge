@@ -2,12 +2,12 @@ import React from 'react';
 import { Routes, Route, HashRouter, Navigate } from 'react-router-dom';
 
 import { LayoutApp } from '../layout-app';
-import { AlertModal, UserModal } from '../modals';
 import { ROUTES } from '../../models/enums';
 import { useAppSelector } from '../../store';
+import { HomePage, LoginPage } from '../../pages';
+import { AlertModal, UserModal } from '../modals';
 import { ProtectiveRoutes } from '../protective-routes';
 import { selectHasActiveUser } from '../../store/selectors';
-import { HomePage, LoginPage } from '../../pages';
 
 export function App() {
   const hasActiveUser = useAppSelector(selectHasActiveUser);

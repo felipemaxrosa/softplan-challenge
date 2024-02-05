@@ -25,10 +25,7 @@ export const LoginForm = () => {
   };
 
   const handleLoginButtonClick = () => {
-    const user = userService.validateCredentials({
-      name: state.name,
-      password: state.password,
-    });
+    const user = userService.validateCredentials(state);
 
     if (!user) {
       dispatch(

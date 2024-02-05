@@ -7,8 +7,8 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../../store';
 import { selectIsAdminUser } from '../../../store/selectors';
+import { useAppDispatch, useAppSelector } from '../../../store';
 import { newUser, setFilteredUsers } from '../../../store/actions/user-actions';
 import { ToolbarContent } from './UsersTableToolbar.styles';
 

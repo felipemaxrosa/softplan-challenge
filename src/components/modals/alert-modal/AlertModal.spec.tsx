@@ -1,5 +1,5 @@
-import { Provider, Selector, useSelector } from 'react-redux';
 import { render, screen } from '@testing-library/react';
+import { Provider, Selector, useSelector } from 'react-redux';
 
 import store from '../../../store';
 import { AlertModal } from './AlertModal';
