@@ -2,14 +2,8 @@ import { Provider, Selector, useSelector } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 
 import store from '../../../store';
-import {
-  selectActiveUser,
-  selectAlertModal,
-  selectIsEditing,
-  selectSelectedUser,
-  selectShowUserModal,
-} from '../../../store/selectors';
 import { AlertModal } from './AlertModal';
+import { selectAlertModal } from '../../../store/selectors';
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
