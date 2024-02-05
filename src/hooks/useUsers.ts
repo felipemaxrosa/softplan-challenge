@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+
 import { userService } from '../services';
-import { useAppDispatch, useAppSelector } from '../store';
 import { setUsers } from '../store/actions/user-actions';
 import { selectFilteredUsers } from '../store/selectors';
+import { useAppDispatch, useAppSelector } from '../store';
 
 export const useUsers = () => {
   const [loading, setLoading] = useState(true);

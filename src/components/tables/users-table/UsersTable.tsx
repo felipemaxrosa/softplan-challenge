@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import {
   Box,
@@ -33,9 +33,6 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
   const activeUser = useAppSelector(selectActiveUser);
   const dispatch = useAppDispatch();
 
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - tableRows.length) : 0;
-
   const handleEditClick = (user: User) => {
     dispatch(editUser(user));
   };
@@ -52,15 +49,20 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
     setPage(0);
   };
 
+  const limitedRows = useMemo(
+    () => tableRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+    [page, rowsPerPage, tableRows]
+  );
+
   return (
     <Paper>
       <UsersTableToolbar />
       <TableContainer>
-        <Table size="medium">
+        <Table size="medium" data-testid="users-table">
           <UsersTableHead heads={USER_TABLE_HEADS} />
 
           <TableBody>
-            {tableRows.map((row) => (
+            {limitedRows?.map((row) => (
               <TableRow hover key={row.id}>
                 <TableCell align="left">{row.id}</TableCell>
                 <TableCell align="left">{row.name}</TableCell>
@@ -77,6 +79,7 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
                     >
                       <Tooltip title="Editar Usuário">
                         <IconButton
+                          data-testid={`users-table-edit-button-user-${row.id}`}
                           aria-label="edit"
                           onClick={() => handleEditClick(row)}
                         >
@@ -87,6 +90,7 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
                       {activeUser?.id !== row.id && (
                         <Tooltip title="Deletar Usuário">
                           <IconButton
+                            data-testid={`users-table-delete-button-user-${row.id}`}
                             aria-label="delete"
                             onClick={() => handleDeleteClick(row.id!)}
                           >
@@ -99,16 +103,6 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
                 )}
               </TableRow>
             ))}
-
-            {emptyRows > 0 && (
-              <TableRow
-                style={{
-                  height: 53 * emptyRows,
-                }}
-              >
-                <TableCell colSpan={5} align="left" />
-              </TableRow>
-            )}
           </TableBody>
         </Table>
       </TableContainer>
