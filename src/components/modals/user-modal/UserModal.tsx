@@ -150,10 +150,15 @@ export const UserModal = () => {
         </Grid>
       </DialogContent>
       <DialogActions sx={{ padding: 2 }}>
-        <Button onClick={handleClose} variant="outlined">
+        <Button
+          data-testid="user-modal-close"
+          onClick={handleClose}
+          variant="outlined"
+        >
           Fechar
         </Button>
         <Button
+          data-testid="user-modal-save"
           onClick={handleSave}
           variant="contained"
           disabled={!isValidatedUser()}

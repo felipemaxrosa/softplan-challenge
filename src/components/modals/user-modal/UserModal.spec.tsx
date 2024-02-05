@@ -1,5 +1,5 @@
 import { Provider, Selector, useSelector } from 'react-redux';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import store from '../../../store';
 import {
@@ -108,5 +108,14 @@ describe('UserModal', () => {
     render(<Component />);
     expect(screen.getByTestId('my-profile-modal')).toBeInTheDocument();
     expect(screen.getByText('Editar Usuário')).toBeInTheDocument();
+  });
+
+  it('should click to close modal', () => {
+    useSelectorMock.mockImplementation(handleMockSelector);
+
+    render(<Component />);
+    expect(screen.getByTestId('my-profile-modal')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId('user-modal-close'));
   });
 });

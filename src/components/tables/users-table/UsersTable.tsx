@@ -56,7 +56,7 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
     <Paper>
       <UsersTableToolbar />
       <TableContainer>
-        <Table size="medium">
+        <Table size="medium" data-testid="users-table">
           <UsersTableHead heads={USER_TABLE_HEADS} />
 
           <TableBody>
@@ -77,6 +77,7 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
                     >
                       <Tooltip title="Editar Usuário">
                         <IconButton
+                          data-testid={`users-table-edit-button-user-${row.id}`}
                           aria-label="edit"
                           onClick={() => handleEditClick(row)}
                         >
@@ -87,6 +88,7 @@ export const UsersTable = ({ tableRows }: UsersTableProps) => {
                       {activeUser?.id !== row.id && (
                         <Tooltip title="Deletar Usuário">
                           <IconButton
+                            data-testid={`users-table-delete-button-user-${row.id}`}
                             aria-label="delete"
                             onClick={() => handleDeleteClick(row.id!)}
                           >

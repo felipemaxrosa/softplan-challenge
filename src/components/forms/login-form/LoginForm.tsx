@@ -45,7 +45,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <FormPaper>
+    <FormPaper data-testid="login-form">
       <FormContainer>
         <form>
           <Grid container mb={2} spacing={2}>
@@ -75,6 +75,7 @@ export const LoginForm = () => {
                 fullWidth
                 onClick={handleLoginButtonClick}
                 disabled={!isValidatedData()}
+                data-testid="login-button"
               >
                 Login
               </Button>
