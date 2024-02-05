@@ -70,7 +70,8 @@ export const userReducer = createReducer(userInitialState, (userBuilder) => {
     userActions.deleteUser.fulfilled,
     (state, { payload }) => ({
       ...state,
-      users: payload,
+      users: state.users.filter((user) => user.id !== payload),
+      filteredUsers: state.filteredUsers.filter((user) => user.id !== payload),
     })
   );
   userBuilder.addCase(userActions.addUser.fulfilled, (state, { payload }) => ({

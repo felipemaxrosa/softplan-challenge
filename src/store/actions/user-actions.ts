@@ -59,7 +59,7 @@ export const updateUser = createAsyncThunk<User, User>(
   }
 );
 export const editUser = createAction<User>(EDIT_USER);
-export const deleteUser = createAsyncThunk<User[], number>(
+export const deleteUser = createAsyncThunk<number, number>(
   DELETE_USER,
   (userId, { getState }) => {
     const allUsers = (getState() as RootState).user.users;
@@ -69,7 +69,7 @@ export const deleteUser = createAsyncThunk<User[], number>(
     });
     storageService.setItem(STORAGE_USERS, filteredUsers);
 
-    return filteredUsers;
+    return userId;
   }
 );
 export const setActiveUser = createAsyncThunk<

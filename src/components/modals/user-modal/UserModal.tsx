@@ -85,8 +85,8 @@ export const UserModal = () => {
   };
 
   const getDialogTitle = () => {
-    if (!isEditingUser) return 'Novo Perfil';
-    if (!editingOwnProfile) return 'Editar Perfil';
+    if (!isEditingUser) return 'Novo Usuário';
+    if (!editingOwnProfile) return 'Editar Usuário';
     return 'Meu Perfil';
   };
 

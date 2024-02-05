@@ -63,3 +63,19 @@ Para que um usuário de nível `ADMIN` possa cadastrar um outro usuário, ele de
 
 E depois disso um modal irá se abrir onde o usuário poderá adicionar um novo usuário:
 ![novo-usuario](docs/images/novo-usuario.jpeg)
+
+### Editando um novo usuário
+
+Para que um usuário de nível `ADMIN` possa editar um outro usuário, ele deve clicar no botao com icone de lapis chamado `Editar Usuário` que fica localizado no final de cada linha da tabela e representa o usuário da linha.
+![editar-usuario-botao](docs/images/editar-usuario-botao.jpeg)
+
+E depois disso um modal irá se abrir onde o usuário poderá editar um usuário:
+![editar-usuario](docs/images/editar-usuario.jpeg)
+
+### Deletando um usuário
+
+Para que um usuário de nível `ADMIN` possa deletar um outro usuário, ele deve clicar no botao com icone de lixeira chamado `Deletar Usuário` que fica localizado no final de cada linha da tabela e representa o usuário da linha.
+![remover-usuario-botao](docs/images/remover-usuario-botao.jpeg)
+
+E depois o usuário sera removido da tabela e tambem o `localStorage` onde os dados estao sendo persistidos:
+![remover-usuario](docs/images/remover-usuario.jpeg)
