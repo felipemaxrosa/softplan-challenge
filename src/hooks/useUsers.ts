@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../store';
 export const useUsers = () => {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const users = useAppSelector(selectFilteredUsers);
+  const filteredUsers = useAppSelector(selectFilteredUsers);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -16,6 +16,7 @@ export const useUsers = () => {
       // Usually we use async/await to requests
       const response = userService.getUsers();
       dispatch(setUsers(response));
+
       setLoading(false);
     } catch (error) {
       setErrorMessage('Erro na requisicao de lista de usuarios');
@@ -25,6 +26,6 @@ export const useUsers = () => {
   return {
     errorMessage,
     loading,
-    users,
+    users: filteredUsers,
   };
 };
