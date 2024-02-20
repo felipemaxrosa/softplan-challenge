@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/softplan-challenge/static/css/main.84094273.css",
-    "main.js": "/softplan-challenge/static/js/main.eb65ef41.js",
+    "main.js": "/softplan-challenge/static/js/main.2fd680ce.js",
     "index.html": "/softplan-challenge/index.html",
     "main.84094273.css.map": "/softplan-challenge/static/css/main.84094273.css.map",
-    "main.eb65ef41.js.map": "/softplan-challenge/static/js/main.eb65ef41.js.map"
+    "main.2fd680ce.js.map": "/softplan-challenge/static/js/main.2fd680ce.js.map"
   },
   "entrypoints": [
     "static/css/main.84094273.css",
-    "static/js/main.eb65ef41.js"
+    "static/js/main.2fd680ce.js"
   ]
 }
