@@ -21,7 +21,15 @@ const SHOW_USER_MODAL = 'USER/SHOW_USER_MODAL';
 const UPDATE_USER = 'USER/UPDATE_USER';
 
 export const bootstrap = createAsyncThunk(BOOTSTRAP, (state, { dispatch }) => {
-  storageService.setItem(STORAGE_USERS, mockUsers);
+  const users = storageService.getItem<User[]>(STORAGE_USERS);
+
+  if (users && users?.length > 0) {
+    dispatch(setUsers(users));
+  } else {
+    storageService.setItem(STORAGE_USERS, mockUsers);
+    dispatch(setUsers(mockUsers));
+  }
+
   const activeUser = storageService.getItem<User>(STORAGE_ACTIVE_USER);
 
   if (activeUser) {
